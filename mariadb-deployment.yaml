@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mariadb-server
-        image: quay.io/anderssonmarcus/wordpresstask
+        image: quay.io/jonasbjork/mariadb:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3306

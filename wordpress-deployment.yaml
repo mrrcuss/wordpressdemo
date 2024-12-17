@@ -21,9 +21,9 @@ spec:
         - containerPort: 8080
         volumeMounts:
         - name: wordpress-data
-          mountPath: /opt/app-root/src
+          mountPath: /var/www/html/wordpress
         - name: wp-config-file
-          mountPath: /opt/app-root/src/wp-config.php
+          mountPath: /var/www/html/wordpress/wp-config.php
           subPath: wp-config.php
       volumes:
       - name: wp-config-file
