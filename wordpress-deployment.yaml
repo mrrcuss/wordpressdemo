@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wordpress-app
-        image: quay.io/anderssonmarcus/wordpresstask:latest
+        image: quay.io/riegerj/boberpress
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
