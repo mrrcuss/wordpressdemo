@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: mariadb-server
-        image: quay.io/anderssonmarcus/wordpresstask
+        image: quay.io/riegerj/boberpress
         imagePullPolicy: Always
         ports:
         - containerPort: 3306
@@ -46,7 +46,7 @@ spec:
       volumes:
       - name: mariadb-data
         persistentVolumeClaim:
-          claimName: mariadb-pvc
+          claimName: marcusmariadb-pvc
 
 
 

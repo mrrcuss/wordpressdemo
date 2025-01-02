@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress-pvc
+  name: marcuswordpress-pvc
 spec:
   accessModes:
   - ReadWriteOnce
