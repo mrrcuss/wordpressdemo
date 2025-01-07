@@ -15,7 +15,11 @@ spec:
     spec:
       containers:
       - name: mariadb-server
+<<<<<<< HEAD
         image: quay.io/riegerj/boberpress
+=======
+        image: quay.io/jonasbjork/mariadb:latest
+>>>>>>> ac7771f6cf17cec6393d4bb80737fda577dcabb0
         imagePullPolicy: Always
         ports:
         - containerPort: 3306
