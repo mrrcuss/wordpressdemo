@@ -1,27 +1,50 @@
-FROM ubuntu:20.04
-ENV DEBIAN_FRONTEND=noninteractive
+# Docker image med redhat ubi 9, PHP installerat samt Boberpress 6.7.1
+FROM docker.io/redhat/ubi9:latest
+# installayion php
+ENV WORDPRESS_VERSION=6.7.1
+# PHP installation
+RUN yum install -y \
+        httpd \
+        php \
+        php-mysqlnd \
+        php-json \
+        php-curl \
+        php-gd \
+        php-mbstring \
+        php-xml \
+        php-opcache \
+        wget \
+        tar \
+        unzip \
+    && yum clean all
 
-RUN apt-get update && apt-get install -y \
-    apache2 \
-    php \
-    php-mysql \
-    wget \
-    unzip \
-    && apt-get clean
 
-#USER 1000 Make sure to set UID when deploy!
-
-RUN mkdir -p /var/www/html/wordpress
+# Nerladdning, uppackning och installation av WordPress
 RUN wget https://wordpress.org/latest.zip -O /tmp/wordpress.zip && unzip /tmp/wordpress.zip -d /var/www/html && rm /tmp/wordpress.zip
 
-RUN chown -R www-data:www-data /var/www/html/wordpress && chmod -R 755 /var/www/html/wordpress
+# Rättigheter för WordPress
+RUN chown -R apache:apache /var/www/html \
+    && chmod -R 755 /var/www/html
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf && \
-    echo "<Directory /var/www/html/wordpress>" >> /etc/apache2/apache2.conf && \
-    echo "AllowOverride All" >> /etc/apache2/apache2.conf && \
-    echo "</Directory>" >> /etc/apache2/apache2.conf
+# Katalogen för wordpress
+WORKDIR /var/www/html/wordpress/
 
-RUN a2enmod rewrite
+
+#Ändring konfiguration för APACHE till port8080 med sed 
+RUN sed -i 's/Listen 80/Listen 8080/' /etc/httpd/conf/httpd.conf
+
+#ändring 3
+RUN touch HEJ.HEJ
+
+
+# öppnar port 8080 i poden
 EXPOSE 8080
-WORKDIR /var/www/html/wordpress
-CMD ["apachectl", "-D", "FOREGROUND"]
+
+# Startar php med port 8080 från /wordpress
+CMD ["php", "-S", "0.0.0.0:8080", "-t", "/var/www/html/wordpress/"]
+#CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+
+RUN touch Bober was here
+
+
