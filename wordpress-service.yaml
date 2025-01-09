@@ -13,6 +13,6 @@ spec:
     protocol: TCP
     targetPort: 8080
   selector:
-    app: wordpress
+    app: wordpress-app
   sessionAffinity: None
   type: ClusterIP

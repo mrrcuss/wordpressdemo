@@ -2,19 +2,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: wordpress-app
   annotations:
-    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"wordpress:latest"},"fieldPath":"spec.template.spec.containers[?(@.name=="wordpress")].image"}]'
+    image.openshift.io/triggers: '[{"from":{"kind":"ImageStreamTag","name":"wordpress:latest"},"fieldPath":"spec.template.spec.containers[?(@.name=="wordpress-app")].image"}]'
 
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: wordpress
+      app: wordpress-app
   template:
     metadata:
       labels:
-        app: wordpress
+        app: wordpress-app
         version: 'latest'
     spec:
       containers:
